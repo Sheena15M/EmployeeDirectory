@@ -31,3 +31,12 @@ const DataTable = () => {
                             );
                         })}
                     </tr>
+                    </thead>
+
+                    <DataBody />
+                </table>
+            </div>
+        );
+}
+
+export default DataTable;
