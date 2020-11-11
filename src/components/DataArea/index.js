@@ -41,3 +41,45 @@ const DataArea = () => {
             } else {
               return b[heading] - a[heading];
             } 
+        } else {
+            if (a[heading] === undefined){
+                return 1;
+            } else if (b[heading] === undefined){
+                return -1;
+            } else if (heading ==="name"){
+                return b[heading].first.localeCompare(a[heading].first);
+            } else {
+    return b[heading]-  a[heading];
+            }
+        }
+        }
+            const sortedUsers = developerState.filteredUsers.sort(compareFnc);
+    
+            setDeveloperState({
+              ...developerState,
+              filteredUsers: sortedUsers
+    });
+    
+     };
+
+     const handleSearchChange = event => {
+        const filter = event.target.value;
+        const filteredList = developerState.users.filter(item => {
+          let values = item.name.first.toLowerCase();
+          return values.indexOf(filter.toLowerCase()) !== -1;
+        });
+    
+        setDeveloperState({ 
+        ...developerState, 
+        filteredUsers: filteredList });
+      };
+
+      useEffect(() => {
+        API.getUsers().then(results => {
+          setDeveloperState({
+            ...developerState,
+            users: results.data.results,
+            filteredUsers: results.data.results
+          });
+        });
+      }, []);
