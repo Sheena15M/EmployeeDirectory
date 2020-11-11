@@ -18,3 +18,26 @@ const DataArea = () => {
           { name: "DOB", width: "10%", }
         ]
       });
+
+      const handleSort = heading => {
+        if (developerState.order === "descend") {
+            setDeveloperState({
+                order:"ascend"
+            })
+        } else{
+            setDeveloperState({
+                order:"descend"
+            })
+        }
+    
+        const compareFnc = (a, b) => {
+          if (developerState.order === "ascend") {
+            if (a[heading] === undefined) {
+              return 1;
+            } else if (b[heading] === undefined) {
+              return -1;
+            } else if (heading === "name") {
+              return a[heading].first.localeCompare(b[heading].first);
+            } else {
+              return b[heading] - a[heading];
+            } 
